@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ApplicationIconHelper.cs" />
+    <Compile Include="WinApi\Base\WinApiBaseMethods.cs" />
+    <Compile Include="WinApi\Base\WinApiSnapshotBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,9 +81,10 @@
     <Compile Include="ViewModel\MainWindowViemModel.cs" />
     <Compile Include="Model\ProcessListModel.cs" />
     <Compile Include="WinApi\AuthenticodeTools.cs" />
-    <Compile Include="WinApi\DangerousPebHack.cs" />
     <Compile Include="WinApi\ProcessUtilities.cs" />
-    <Compile Include="WinApi\UacHelper.cs" />
+    <Compile Include="WinApi\Base\NativeMethodsBase.cs" />
+    <Compile Include="WinApi\ProcessSnapshotManager.cs" />
+    <Compile Include="WinApi\UacManager.cs" />
     <Compile Include="WinApi\NativeMethods.cs" />
     <Compile Include="ViewModel\ProcessInfo.cs" />
     <Compile Include="ViewModel\ProcessListViewModel.cs" />

@@ -7,7 +7,7 @@ using System.Security.Principal;
 
 namespace ProcessViewerTestApp.WinApi
 {
-    public static class UacHelper
+    public class UacManager
     {
         private const string uacRegistryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
         private const string uacRegistryValue = "EnableLUA";
@@ -81,8 +81,7 @@ namespace ProcessViewerTestApp.WinApi
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
 
-            IntPtr tokenHandle;
-            if (!OpenProcessToken(handle, TOKEN_READ, out tokenHandle))
+            if (!OpenProcessToken(handle, TOKEN_READ, out IntPtr tokenHandle))
             {
                 throw new ApplicationException("Could not get process token.  Win32 Error Code: " + Marshal.GetLastWin32Error());
             }

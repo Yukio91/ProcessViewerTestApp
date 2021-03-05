@@ -157,7 +157,7 @@ namespace ProcessViewerTestApp.WinApi
         private const string WINTRUST_ACTION_GENERIC_VERIFY_V2 = "{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}";
 
         [DllImport("wintrust.dll", ExactSpelling = true, SetLastError = false, CharSet = CharSet.Unicode)]
-        static extern WinVerifyTrustResult WinVerifyTrust(
+        private static extern WinVerifyTrustResult WinVerifyTrust(
             [In] IntPtr hwnd,
             [In][MarshalAs(UnmanagedType.LPStruct)] Guid pgActionID,
             [In] WinTrustData pWVTData
@@ -184,23 +184,5 @@ namespace ProcessViewerTestApp.WinApi
             }
         }
         private WinTrust() { }
-    }
-
-    public static class X509Checker
-    {
-        public static bool IsSignedX509(string filePath)
-        {
-            X509Certificate2 certificate;
-            try
-            {
-                X509Certificate signer = X509Certificate.CreateFromSignedFile(filePath);
-                certificate = new X509Certificate2(signer);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
     }
 }
