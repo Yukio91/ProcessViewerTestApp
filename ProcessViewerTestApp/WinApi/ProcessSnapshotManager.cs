@@ -1,5 +1,5 @@
 ﻿using ProcessViewerTestApp.Helpers;
-using ProcessViewerTestApp.ViewModel;
+using ProcessViewerTestApp.Model;
 using ProcessViewerTestApp.WinApi.Base;
 using System;
 using System.Collections.Generic;

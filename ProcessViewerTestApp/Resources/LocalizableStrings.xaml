@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ProcessViewerTestApp.Resources">
+
+    <system:String x:Key="LS_ProcessList">Список процессов</system:String>
+
+    <system:String x:Key="LS_Update">Обновить</system:String>
+    <system:String x:Key="LS_Break">Прервать</system:String>
+    <system:String x:Key="LS_Breaking">Прерывание...</system:String>
+</ResourceDictionary>

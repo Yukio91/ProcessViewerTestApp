@@ -72,6 +72,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\LocalizableStrings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ProcessListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,7 +90,7 @@
     <Compile Include="WinApi\ProcessSnapshotManager.cs" />
     <Compile Include="WinApi\UacManager.cs" />
     <Compile Include="WinApi\NativeMethods.cs" />
-    <Compile Include="ViewModel\ProcessInfo.cs" />
+    <Compile Include="Model\ProcessInfo.cs" />
     <Compile Include="ViewModel\ProcessListViewModel.cs" />
     <Compile Include="View\ProcessListView.xaml.cs">
       <DependentUpon>ProcessListView.xaml</DependentUpon>

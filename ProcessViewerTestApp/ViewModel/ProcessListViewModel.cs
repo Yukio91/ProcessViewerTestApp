@@ -1,4 +1,5 @@
 ﻿using ProcessViewerTestApp.Base;
+using ProcessViewerTestApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

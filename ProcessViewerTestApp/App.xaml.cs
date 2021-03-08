@@ -24,9 +24,6 @@ namespace ProcessViewerTestApp
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //base.MainWindow = new MainWindow(_localSettings);
-            //MainWindow.Show();
-
             var manager = new ProcessManager();
             var list = manager.GetProcessInfos();
             

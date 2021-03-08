@@ -1,4 +1,4 @@
-﻿using ProcessViewerTestApp.ViewModel;
+﻿using ProcessViewerTestApp.Model;
 using ProcessViewerTestApp.WinApi;
 using System;
 using System.Collections.Generic;
@@ -14,8 +14,7 @@ namespace ProcessViewerTestApp
 			using (var processSnapshot = new ProcessSnapshotManager())
 			{
 				return processSnapshot.GetProcessInfos();
-			}
-			
+			}			
 		}
     }
 }

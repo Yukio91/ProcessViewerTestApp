@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace ProcessViewerTestApp.ViewModel
+namespace ProcessViewerTestApp.Model
 {
     public class ProcessInfo
     {
