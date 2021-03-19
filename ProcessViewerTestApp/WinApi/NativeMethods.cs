@@ -22,7 +22,24 @@ namespace ProcessViewerTestApp.WinApi
         internal static string GetProcessFullPathByHandle(IntPtr handle)
         {
             return GetMainModuleFileName(handle);
-        }        
+        }
+
+        internal static bool DeleteObjectByHandle(IntPtr hBitmap)
+        {
+            try
+            {
+                if (!DeleteObject(hBitmap))
+                {
+                    throw new Win32Exception();
+                }
+
+                return true;
+            }
+            catch (Win32Exception)
+            {
+                return false;
+            }
+        }
 
         #region Get Icon
 

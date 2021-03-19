@@ -43,6 +43,9 @@ namespace ProcessViewerTestApp.WinApi.Base
         [DllImport("user32.dll")]
         protected static extern IntPtr GetWindowThreadProcessId(IntPtr window, out int process);
 
+        [DllImport("gdi32.dll", SetLastError = true)]
+        protected static extern bool DeleteObject(IntPtr hObject);
+
         #region Get Application Icon
 
         public const int GCL_HICONSM = -34;

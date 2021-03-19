@@ -56,7 +56,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions\IconExtensions.cs" />
+    <Compile Include="Extensions\SwitchBindingExtension.cs" />
     <Compile Include="Helpers\ApplicationIconHelper.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="View\ProcessListView.xaml.cs">
+      <DependentUpon>ProcessListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinApi\Base\WinApiBaseMethods.cs" />
     <Compile Include="WinApi\Base\WinApiSnapshotBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -92,9 +98,6 @@
     <Compile Include="WinApi\NativeMethods.cs" />
     <Compile Include="Model\ProcessInfo.cs" />
     <Compile Include="ViewModel\ProcessListViewModel.cs" />
-    <Compile Include="View\ProcessListView.xaml.cs">
-      <DependentUpon>ProcessListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ProcessManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

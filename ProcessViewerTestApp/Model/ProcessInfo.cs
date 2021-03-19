@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace ProcessViewerTestApp.Model
 {
@@ -7,7 +7,7 @@ namespace ProcessViewerTestApp.Model
     {
         public IntPtr Handle { get; set; }
 
-        public Icon AppIcon { get; set; }
+        public ImageSource AppIcon { get; set; }
         public int Id { get; set; }
         public string ShortName { get; set; }
         public string FullName { get; set; }

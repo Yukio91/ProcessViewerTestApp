@@ -1,12 +1,62 @@
-﻿<UserControl x:Class="ProcessViewerTestApp.ProcessListView"
+﻿<UserControl x:Class="ProcessViewerTestApp.View.ProcessListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProcessViewerTestApp"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ProcessViewerTestApp.ViewModel" 
+             xmlns:ext="clr-namespace:ProcessViewerTestApp.Extensions"
+             d:DataContext="{d:DesignInstance Type=vm:ProcessListViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+
+    <Grid MinHeight="450" MinWidth="600" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
+            <ListView Grid.Row="0" Name="processList" ItemsSource="{Binding ProcessList}">
+
+                <ListView.View>
+                    <GridView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=AppIcon}" Header="{DynamicResource LS_ColAppIcon}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                <Image Height="32" Width="32" Source="{Binding Path=AppIcon, Mode=OneWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="{DynamicResource LS_ColIdProcess}" Width="30" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ShortName}" Header="{DynamicResource LS_ColShortName}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="{DynamicResource LS_ColFullName}" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Arguments}" Header="{DynamicResource LS_ColArguments}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Owner}" Header="{DynamicResource LS_ColOwner}"/>
+                        <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding Is64bit, {DynamicResource LS_Yes}, {DynamicResource LS_No}}" Header="{DynamicResource LS_ColIs64Bit}"/>
+                        <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding IsElevated, {DynamicResource LS_Yes}, {DynamicResource LS_No}}" Header="{DynamicResource LS_ColIsElevated}"/>
+                        <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding IsSigned, {DynamicResource LS_Yes}, {DynamicResource LS_No}}" Header="{DynamicResource LS_ColIsSigned}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        <!--</ScrollViewer>-->
+
+        <Button Grid.Row="1" Margin="10" Height="30" Width="150" Command="{Binding Path=UpdateCommand}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ButtonState}" Value="{x:Static vm:ButtonState.Update}">
+                            <Setter Property="Content" Value="{DynamicResource LS_BtnUpdate}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ButtonState}" Value="{x:Static vm:ButtonState.Break}">
+                            <Setter Property="Content" Value="{DynamicResource LS_BtnBreak}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ButtonState}" Value="{x:Static vm:ButtonState.Breaking}">
+                            <Setter Property="Content" Value="{DynamicResource LS_BtnBreaking}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
     </Grid>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -24,8 +25,8 @@ namespace ProcessViewerTestApp
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var manager = new ProcessManager();
-            var list = manager.GetProcessInfos();
+            //var manager = new ProcessManager();
+            //var list = manager.GetProcessInfos(CancellationToken.None);
             
             base.OnStartup(e);
         }

@@ -12,9 +12,9 @@ namespace ProcessViewerTestApp.WinApi
         private const string uacRegistryKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
         private const string uacRegistryValue = "EnableLUA";
 
-        private static uint STANDARD_RIGHTS_READ = 0x00020000;
-        private static uint TOKEN_QUERY = 0x0008;
-        private static uint TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
+        private static readonly uint STANDARD_RIGHTS_READ = 0x00020000;
+        private static readonly uint TOKEN_QUERY = 0x0008;
+        private static readonly uint TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY;
 
         [DllImport("advapi32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -90,8 +90,7 @@ namespace ProcessViewerTestApp.WinApi
 
             int elevationResultSize = Marshal.SizeOf((int)elevationResult);
             IntPtr elevationTypePtr = Marshal.AllocHGlobal(elevationResultSize);
-
-            bool success = GetTokenInformation(tokenHandle, TOKEN_INFORMATION_CLASS.TokenElevationType, elevationTypePtr, (uint)elevationResultSize, out uint returnedSize);
+            bool success = GetTokenInformation(tokenHandle, TOKEN_INFORMATION_CLASS.TokenElevationType, elevationTypePtr, (uint)elevationResultSize, out _);
             if (!success)
             {
                 throw new ApplicationException("Unable to determine the current elevation.");

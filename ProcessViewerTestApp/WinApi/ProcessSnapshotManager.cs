@@ -1,10 +1,12 @@
-﻿using ProcessViewerTestApp.Helpers;
+﻿using ProcessViewerTestApp.Extensions;
+using ProcessViewerTestApp.Helpers;
 using ProcessViewerTestApp.Model;
 using ProcessViewerTestApp.WinApi.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace ProcessViewerTestApp.WinApi
 {
@@ -33,7 +35,7 @@ namespace ProcessViewerTestApp.WinApi
             };
         }
 
-        public IEnumerable<ProcessInfo> GetProcessInfos()
+        public IEnumerable<ProcessInfo> GetProcessInfos(CancellationToken token)
         {
             var processList = new List<ProcessInfo>();
 
@@ -44,6 +46,11 @@ namespace ProcessViewerTestApp.WinApi
                     IntPtr processHandle = IntPtr.Zero;
                     try
                     {
+                        if (token.IsCancellationRequested)
+                        {
+                            return new List<ProcessInfo>();
+                        }
+
                         var processId = (int)ProcessEntry.th32ProcessID;
                         processHandle = NativeMethods.GetHandleByProcessId(processId);
                         if (processHandle == IntPtr.Zero)
@@ -57,7 +64,7 @@ namespace ProcessViewerTestApp.WinApi
                             ShortName = ProcessEntry.szExeFile,
                             FullName = processFullPath,
                             Arguments = ProcessUtilities.GetCommandLine(processId),
-                            AppIcon = ApplicationIconHelper.GetIconByPath(processFullPath),
+                            AppIcon = ApplicationIconHelper.GetIconByPath(processFullPath).ToImageSource(),
                             Owner = UacManager.GetProcessOwner(processId),
                             Is64bit = NativeMethods.Is64BitChecker.IsWow64Process(processHandle),
                             IsElevated = UacManager.IsProcessElevated(processHandle),

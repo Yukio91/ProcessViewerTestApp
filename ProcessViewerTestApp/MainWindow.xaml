@@ -3,10 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:views="clr-namespace:ProcessViewerTestApp.View"
+        xmlns:viewModels="clr-namespace:ProcessViewerTestApp.ViewModel"
         xmlns:local="clr-namespace:ProcessViewerTestApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="{DynamicResource LS_ProcessList}" MinHeight="460" MinWidth="610">
+
+    <!--<Viewbox x:Name="Viewbox" Stretch="UniformToFill" Margin="5">-->
+        <!--<DockPanel Background="White" Margin="5">-->
+            <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="{Binding ProcessListViewModel}">
+                <ContentPresenter.ContentTemplate>
+                    <DataTemplate DataType="viewModels:ProcessListViewModel">
+                        <views:ProcessListView/>
+                    </DataTemplate>
+                </ContentPresenter.ContentTemplate>
+            </ContentPresenter>
+        <!--</DockPanel>-->
+    <!--</Viewbox>-->
 </Window>

@@ -23,6 +23,7 @@ namespace ProcessViewerTestApp
     {
 
         internal MainWindowViemModel Model => (MainWindowViemModel)DataContext;
+        public ProcessListViewModel ProcessListViewModel => Model.ProcessListViewModel;
 
         public MainWindow()
         {
