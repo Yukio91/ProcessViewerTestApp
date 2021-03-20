@@ -59,6 +59,7 @@ namespace ProcessViewerTestApp.ViewModel
         {
             if (e.PropertyName.Equals(nameof(_model.ProcessInfos)))
             {
+                ButtonState = ButtonState.Update;
                 OnPropertyChanged(nameof(ProcessList));
             }
         }
