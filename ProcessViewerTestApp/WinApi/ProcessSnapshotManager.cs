@@ -64,7 +64,7 @@ namespace ProcessViewerTestApp.WinApi
                             ShortName = ProcessEntry.szExeFile,
                             FullName = processFullPath,
                             Arguments = ProcessUtilities.GetCommandLine(processId),
-                            AppIcon = ApplicationIconHelper.GetIconByPath(processFullPath).ToImageSource(),
+                            AppIcon = ApplicationIconHelper.GetIconByPath(processFullPath),
                             Owner = UacManager.GetProcessOwner(processId),
                             Is64bit = NativeMethods.Is64BitChecker.IsWow64Process(processHandle),
                             IsElevated = UacManager.IsProcessElevated(processHandle),

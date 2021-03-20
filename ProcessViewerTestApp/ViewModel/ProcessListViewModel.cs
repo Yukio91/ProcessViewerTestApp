@@ -81,8 +81,6 @@ namespace ProcessViewerTestApp.ViewModel
                     ButtonState = ButtonState.Breaking;
                     _model.CancelUpdateOperation();
                     break;
-                case ButtonState.Breaking:
-                    break;
             }
         }
     }

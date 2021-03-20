@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
              xmlns:vm="clr-namespace:ProcessViewerTestApp.ViewModel" 
              xmlns:ext="clr-namespace:ProcessViewerTestApp.Extensions"
              d:DataContext="{d:DesignInstance Type=vm:ProcessListViewModel}"
@@ -18,28 +17,28 @@
         </Grid.RowDefinitions>
 
         <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
-            <ListView Grid.Row="0" Name="processList" ItemsSource="{Binding ProcessList, Mode=OneWay}">
-
-                <ListView.View>
-                    <GridView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=AppIcon}" Header="{StaticResource LS_ColAppIcon}">
-                            <GridViewColumn.CellTemplate>
-                            <DataTemplate DataType="{x:Type media:ImageSource}">
-                                <Image Height="32" Width="32" Source="{Binding Path=AppIcon, Mode=OneWay}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+        <ListView Grid.Row="0" Name="processList" ItemsSource="{Binding ProcessList, Mode=OneWay}" >
+            <ListView.View>
+                <GridView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                    <GridViewColumn Header="{StaticResource LS_ColAppIcon}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Height="32" Width="32" Source="{Binding AppIcon, Converter={StaticResource IconConverter}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="{StaticResource LS_ColIdProcess}" Width="30" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ShortName}" Header="{StaticResource LS_ColShortName}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Header="{StaticResource LS_ColFullName}" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}"  Header="{StaticResource LS_ColFullName}" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Arguments}" Header="{StaticResource LS_ColArguments}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Owner}" Header="{StaticResource LS_ColOwner}"/>
-                    <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding Is64bit, {StaticResource LS_Yes}, {StaticResource LS_No}}" Header="{StaticResource LS_ColIs64Bit}"/>
+                    <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding Is64bit, '64bit', '32bit'}" Header="{StaticResource LS_ColIs64Bit}"/>
                     <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding IsElevated, {StaticResource LS_Yes}, {StaticResource LS_No}}" Header="{StaticResource LS_ColIsElevated}"/>
                     <GridViewColumn DisplayMemberBinding="{ext:SwitchBinding IsSigned, {StaticResource LS_Yes}, {StaticResource LS_No}}" Header="{StaticResource LS_ColIsSigned}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
         <!--</ScrollViewer>-->
 
         <Button Grid.Row="1" Margin="10" Height="30" Width="150" Command="{Binding Path=UpdateCommand}">

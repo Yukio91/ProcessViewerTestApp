@@ -12,20 +12,28 @@ namespace ProcessViewerTestApp
     {
         private readonly BackgroundWorker _worker;
 
-        private readonly CancellationTokenSource _tokenSource;
-        private readonly CancellationToken _token;
+        private CancellationTokenSource _tokenSource;
+        private CancellationToken _token;
 
         private OperationState _operationState = OperationState.None;
         private IEnumerable<ProcessInfo> _processInfos;
 
         public ProcessManager()
         {
-            _tokenSource = new CancellationTokenSource();
-            _token = _tokenSource.Token;
-
             _worker = new BackgroundWorker();
             _worker.DoWork += _worker_DoWork;
             _worker.RunWorkerCompleted += _worker_RunWorkerCompleted;
+        }
+
+        private void CreateToken()
+        {
+            if (_tokenSource == null || _tokenSource.IsCancellationRequested)
+            {
+                _tokenSource?.Dispose();
+
+                _tokenSource = new CancellationTokenSource();
+                _token = _tokenSource.Token;
+            }
         }
 
         private void _worker_DoWork(object sender, DoWorkEventArgs e)
@@ -51,6 +59,7 @@ namespace ProcessViewerTestApp
         {
             try
             {
+                CreateToken();
                 _operationState = OperationState.DoWorking;
 
                 _worker.RunWorkerAsync();

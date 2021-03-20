@@ -16,30 +16,31 @@ namespace ProcessViewerTestApp.Extensions
             if (icon == null)
                 return null;
 
-            //Bitmap bitmap = icon.ToBitmap();
-            //IntPtr hBitmap = bitmap.GetHbitmap();
+            Bitmap bitmap = icon.ToBitmap();
+            IntPtr hBitmap = bitmap.GetHbitmap();
 
-            //ImageSource wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(
-            //    hBitmap,
-            //    IntPtr.Zero,
-            //    Int32Rect.Empty,
-            //    BitmapSizeOptions.FromEmptyOptions());
+            ImageSource wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(
+                hBitmap,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
 
-            //NativeMethods.DeleteObjectByHandle(hBitmap);
+            NativeMethods.DeleteObjectByHandle(hBitmap);
 
-            //return wpfBitmap;
+            return wpfBitmap;
+        }
 
-            try
+        public static System.Windows.Controls.Image ToImage(this Icon icon)
+        {
+            if (icon == null)
+                return null;
+
+            var image = new System.Windows.Controls.Image
             {
-                using (Bitmap bmp = icon.ToBitmap())
-                {
-                    var stream = new MemoryStream();
-                    bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                    return BitmapFrame.Create(stream);
-                }
-            }
-            finally { NativeMethods.DeleteObjectByHandle(icon.Handle); }
+                Source = icon.ToImageSource()
+            };
 
+            return image;
         }
 
     }
